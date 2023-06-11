@@ -1,28 +1,14 @@
-#include "iostream"
-#include "vector"
-#include "cmath"
-#include "queue"
-#include "cstring"
-#include "unordered_set"
-#include "stack"
-#include "bitset"
-#include "../head files/Nporan.h"
+#include "Nporan.h"
 using namespace std;
-
-/*
- * 后缀表达式结果计算
- * https://leetcode.cn/problems/8Zf90G/
- */
 
 static string priori{"*/"};
 static string inferior{"+-"};
 
-
- double Polution::evalRPN(vector<string>& tokens) {
+ double Calculation::evalRPN(vector<string>& tokens) {
         stack<double> stk;
         int n = (int)tokens.size();
         for (int i = 0; i < n; i++) {
-            string& token = tokens[i];//想想如何判断是否是一个数组以及如何将string转为数字
+            string& token = tokens[i];
             if (is_a_realnumber(token)) {
                 stk.push(stod(token));
             } else {
@@ -49,7 +35,7 @@ static string inferior{"+-"};
         return stk.top();
     }
 
-    bool Polution::is_a_realnumber(const string & c) {
+    bool Calculation::is_a_realnumber(const string & c) {
      bool flag = false;
      for(auto& p: c){
          if(p == '.') flag = true;
@@ -57,14 +43,7 @@ static string inferior{"+-"};
         return isNumber(c) || flag;
  }
 
-    bool Polution::isNumber(const string& token) {//改进之后使用isdigit（）函数来挨个判断是否为一个数字
-        //for (char c: token) {
-        //  if(!isdigit(c)) return false;
-        //}
-        //使用std::all_of()函数，这个函数用于检查容器当中所有元素是否满足特定条件
-
-        //下面这个是有bug的，因为对于负数来说会被识别为不是数字
-        //return !token.empty() && all_of(token.begin(),token.end(),::isdigit);
+    bool Calculation::isNumber(const string& token) {//改进之后使用isdigit（）函数来挨个判断是否为一个数字
         if (token.empty()) {
             return false;
         }
@@ -75,19 +54,19 @@ static string inferior{"+-"};
         return (it != token.end()) && all_of(it, token.end(), ::isdigit);
     }
 
-bool Solution::smaller(char &a,char &b){
+bool Converting::smaller(char &a,char &b){
     if(b == '(') return false;//如果top为左括号就直接停止
     if(priori.find(a) != string::npos && inferior.find(b) != string::npos) return false;//a优先于b
     return true;//ab同级或者a小于b
 }
 
-vector<string> Solution::convert(vector<string>& target){
+vector<string> Converting::convert(vector<string>& target){
     int len = (int)target.size();
     vector<string> ans;
     stack<char> mystack;
     for (int i = 0; i < len; ++i) {
         auto temp = target[i];
-        if(Polution::is_a_realnumber(temp)) {
+        if(Calculation::is_a_realnumber(temp)) {
             ans.push_back(temp);
             continue;
         }
@@ -140,7 +119,10 @@ vector<string> Solution::convert(vector<string>& target){
 }
 
     vector<string> Split::split() {
-        cout<<"请输入你的表达式.每个数字和字符不用空格隔开，支持浮点计算，结果保留5位小数，若输入负数请使用括号将数字完整的括起来，仅支持基本的四则运算"<<endl;
+        cout<<"Please enter your expression. Do not separate each number and character "
+              "with spaces. Floating-point calculations are supported,\n and the result is "
+              "rounded to 5 decimal places. If entering a negative number, please **make sure** enclose it "
+              "in parentheses.\n Only basic arithmetic operations are supported."<<endl;
         string s;
         vector<string> ans;
         getline(cin,s);
@@ -159,7 +141,7 @@ vector<string> Solution::convert(vector<string>& target){
                     }
                 }
                 if(right == -1) {
-                    cout<<"表达式有误！"<<endl;
+                    cout<<"wrong expression!"<<endl;
                     exit(1);
                 }
                 int num = right - i-1;

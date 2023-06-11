@@ -1,22 +1,20 @@
-//
-// Created by 谢川峰 on 2023/6/11.
-//
 
 #ifndef PRACTICE_NPORAN_H
 #define PRACTICE_NPORAN_H
 #include "iostream"
 #include "vector"
 #include "string"
+#include "stack"
 using namespace std;
 
-class Solution{//用于将中缀转后缀
+class Converting{//用于将中缀转后缀
 public:
     static bool smaller(char&,char&);
     static vector<string> convert(vector<string>&);
 };
 
 
-class Polution{//用于后缀计算
+class Calculation{//用于后缀计算
 public:
     static double evalRPN(vector<string>&);
     static bool isNumber(const string&);

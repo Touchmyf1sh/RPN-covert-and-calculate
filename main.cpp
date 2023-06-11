@@ -1,12 +1,4 @@
-#include "iostream"
-#include "vector"
-#include "cmath"
-#include "queue"
-#include "cstring"
-#include "unordered_set"
-#include "stack"
-#include "bitset"
-#include "../head files/Nporan.h"
+#include "Nporan.h"
 
 using namespace std;
 /*
@@ -17,19 +9,19 @@ using namespace std;
 
 int main(){
     auto temp = Split::split();
-    cout<<"转化出的vector数组为： ";
+    cout<<"the splited string vector is： ";
     for (auto& p:temp) {
         cout<<p<<" ";
     }
     cout<<endl;
-    auto tp = Solution::convert(temp);
-    cout<<"转化出来的逆波兰数为： ";
+    auto tp = Converting::convert(temp);
+    cout<<"the PRN expression is： ";
     for (auto& p:tp) {
         cout<<p<<" ";
     }
     cout<<endl;
-    auto ans = Polution::evalRPN(tp);
-    cout<<"最终结果为： ";
+    auto ans = Calculation::evalRPN(tp);
+    cout<<"the final ans is： ";
     auto prec = cout.setf(ios_base::fixed,ios_base::floatfield);
     auto pre = cout.precision(5);//保留五位小数
     cout<<ans<<endl;
